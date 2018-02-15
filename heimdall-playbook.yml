@@ -13,8 +13,8 @@
 
   tasks:
   - name: Ensure Nginx is installed
-        yum: name=nginx state=present
-        when: ansible_os_family == "RedHat"
+    yum: name=nginx state=present
+    when: ansible_os_family == "RedHat"
 
 
   - name: Start Nginx service
