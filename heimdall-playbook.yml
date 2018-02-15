@@ -25,27 +25,58 @@
   - name: create /var/www/ directory
     file: dest=/var/www/ state=directory owner=www-data group=www-data mode=0700
 
+  roles:
+    - role: geerlingguy.php
+      php_version: "7.0"
+      php_packages:
+        - php7.0-common
+        - php7.0-cli
+        - php7.0-dev
+        - php7.0-fpm
+        - libpcre3-dev
+        - php7.0-gd
+        - php7.0-curl
+        - php7.0-imap
+        - php7.0-json
+        - php7.0-opcache
+        - php7.0-xml
+        - php7.0-mbstring
+      php_date_timezone: "America/Los_Angeles"
+      php_mysql_package: php7.0-mysql
+      php_fpm_daemon: php7.0-fpm
+      php_webserver_daemon: nginx
+      php_conf_paths:
+        - /etc/php/7.0/fpm
+        - /etc/php/7.0/apache2
+        - /etc/php/7.0/cli
+      php_extension_conf_paths:
+        - /etc/php/7.0/fpm/conf.d
+        - /etc/php/7.0/apache2/conf.d
+        - /etc/php/7.0/cli/conf.d
+      php_fpm_pool_conf_path: "/etc/php/7.0/fpm/pool.d/www.conf"  
 
-  - name: ensure php5-fpm cgi.fix_pathinfo=0
-    lineinfile: dest=/etc/php/7.0/fpm/php.ini regexp='^(.*)cgi.fix_pathinfo=' line=cgi.fix_pathinfo=0
-    notify:
-      - restart php5-fpm
-      - restart nginx
+#  - name: ensure php5-fpm cgi.fix_pathinfo=0
+#    lineinfile: dest=/etc/php/7.0/fpm/php.ini regexp='^(.*)cgi.fix_pathinfo=' line=cgi.fix_pathinfo=0
+#    notify:
+#      - restart php5-fpm
+#      - restart nginx
 
   - name: Start Nginx service
     service: name=nginx enabled=yes state=started
 
-  - name: Clone Git Repo
-    git: >
-      dest: /var/www/html
-      repo: 'https://github.com/linuxserver/Heimdall'
-      clone: yes
-    become: true
-    become_user: www-data
+    
+#  tasks:
+#  - name: Clone Git Repo
+#    git: >
+#      dest: /var/www/html
+#      repo: 'https://github.com/linuxserver/Heimdall'
+#      clone: yes
+#    become: true
+#    become_user: www-data
 
-  handlers:
-  - name: restart php5-fpm
-    service: name=php5-fpm state=restarted
-  
-  - name: restart nginx
-    service: name=nginx state=restarted
+#handlers:
+#  - name: restart php5-fpm
+#    service: name=php5-fpm state=restarted
+#  
+#  - name: restart nginx
+#    service: name=nginx state=restarted
