@@ -22,6 +22,7 @@
       - php7.0-mbstring
       - php7.0-sqlite3
       - sqlite3
+      - nginx
   - name: create /var/www/ directory
     file: dest=/var/www/ state=directory owner=www-data group=www-data mode=0700
 
