@@ -1,19 +1,19 @@
 ---
 - hosts: all
 
-  pretasks:
+  pre_tasks:
   - name: Add Ansible PPA
     apt_repository:
       repo: 'ppa:ansible/ansible'
 
-  tasks:
+  pre_tasks:
   - name: Update ansible to the latest version 
     apt:
       update_cache: yes
       name: ansible
       state: present
 
-  tasks:
+  pre_tasks:
   - name: Install Packages
     apt: name={{item}} update_cache=yes state=latest
     with_items:
@@ -61,5 +61,6 @@
     dest: /var/www/html
     clone: yes
     update: yes
-  - name: Move Heimdall to /var/www/html
+
+    - name: Move Heimdall to /var/www/html
     command: mv /var/www/html/Heimdall /var/www/html
