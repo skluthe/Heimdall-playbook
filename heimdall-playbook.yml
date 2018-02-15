@@ -9,13 +9,6 @@
       - php7.0
       - php7.0-mbstring
       - php7.0-sqlite3
-    when: ansible_os_family == "Debian"
-
-  tasks:
-  - name: Ensure Nginx is installed
-    yum: name=nginx state=present
-    when: ansible_os_family == "RedHat"
-
 
   - name: Start Nginx service
     service: name=nginx enabled=yes state=started
