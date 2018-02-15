@@ -55,9 +55,9 @@
         - /etc/php/7.0/apache2/conf.d
         - /etc/php/7.0/cli/conf.d
       php_fpm_pool_conf_path: "/etc/php/7.0/fpm/pool.d/www.conf"  
-  
-  - name: Clone Heimdall Git Repo 
+  tasks: 
+    - name: Clone Heimdall Git Repo 
       git: repo='https://github.com/skluthe/Heimdall-playbook' dest=/var/www/html clone=yes update=yes
 
     - name: Move Heimdall to /var/www/html
-    command: mv /var/www/html/Heimdall /var/www/html
+      command: mv /var/www/html/Heimdall /var/www/html
