@@ -35,8 +35,6 @@
   - name: Start Nginx service
     service: name=nginx enabled=yes state=started
 
-    
-  tasks:
   - name: Clone Git Repo
     git: >
       dest: /var/www/html
