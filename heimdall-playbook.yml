@@ -61,8 +61,8 @@
 #      - restart php5-fpm
 #      - restart nginx
 
-  - name: Start Nginx service
-    service: name=nginx enabled=yes state=started
+#  - name: Start Nginx service
+#    service: name=nginx enabled=yes state=started
 
     
 #  tasks:
