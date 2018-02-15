@@ -20,8 +20,8 @@
   - name: Start Nginx service
     service: name=nginx enabled=yes state=started
 
-  tasks:
-  - git:
-    repo: 'https://github.com/linuxserver/Heimdall'
-    dest: /var/www/html
-    clone: yes
+#  tasks:
+#  - git:
+#    repo: 'https://github.com/linuxserver/Heimdall'
+#    dest: /var/www/html
+#    clone: yes
