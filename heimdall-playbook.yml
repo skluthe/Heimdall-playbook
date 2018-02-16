@@ -10,7 +10,7 @@
     apt:
       update_cache: yes
       name: ansible
-      state: latest
+      state: present
 
   - name: Install Packages
     apt: name={{item}} update_cache=yes state=latest
@@ -29,6 +29,11 @@
       path: /var/www/html/index.nginx-debian.html
       state: absent
 
+  - name: remove default index.html
+    file:
+      path: /etc/nginx/sites-available/default
+      state: absent
+
   - name: Clone Heimdall Git Repo 
     git: repo='https://github.com/linuxserver/Heimdall' dest=/var/www/html clone=yes update=yes
 
@@ -36,20 +41,20 @@
     become: true
     template:
       src: templates/nginx.conf
-      dest: "/etc/nginx/sites-available/heimdall.conf"
+      dest: "/etc/nginx/sites-available/default"
 
   - name: Enable Symfony config template from Nginx available sites
     become: true
     file:
-      src: "/etc/nginx/sites-available/heimdall.conf"
-      dest: "/etc/nginx/sites-enabled/heimdall.conf"
+      src: "/etc/nginx/sites-available/default"
+      dest: "/etc/nginx/sites-enabled/default"
       state: link
 
   - name: ensure php7.0-fpm cgi.fix_pathinfo=0
     lineinfile: dest=/etc/php/7.0/fpm/php.ini regexp='^(.*)cgi.fix_pathinfo=' line=cgi.fix_pathinfo=0
     notify:
-      - restart php7.0-fpm.service
-      - restart nginx
+#      - restart php7.0-fpm.service
+#      - restart nginx
 
   roles:
     - role: geerlingguy.php
