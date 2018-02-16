@@ -22,7 +22,7 @@
       - sqlite3
       - nginx
   - name: create /var/www/ directory
-    file: dest=/var/www/ state=directory owner=www-data group=www-data mode=0760
+    file: dest=/var/www/html state=directory owner=www-data group=www-data mode=0770
 
   - name: remove default index.html
     file:
