@@ -21,8 +21,6 @@
       - php7.0-sqlite3
       - sqlite3
       - nginx
-  - name: create /var/www/ directory
-    file: dest=/var/www/html state=directory owner=www-data group=www-data mode=0770
 
   - name: remove default index.html
     file:
@@ -88,4 +86,6 @@
     
     - role: geerlingguy.nginx
 
-
+  post_tasks:
+    - name: Change owner for html directory
+    file: dest=/var/www/html owner=www-data group=www-data mode=0700
