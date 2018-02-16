@@ -21,11 +21,29 @@
       - php7.0-sqlite3
       - sqlite3
       - nginx
+      - unzip
 
   - name: remove default index.html
     file:
-      path: /var/www/html/index.nginx-debian.html
+      path: /var/www/html/
       state: absent
+
+  - name: Download Heimdall Release
+    get_url:
+      url: https://github.com/linuxserver/Heimdall/archive/v1.3.4.zip
+      dest: ~/Heimdall-playbook/Heimdall.zip
+
+  - name: Extract archive
+    unarchive:
+      src: ~/Heimdall-playbook/Heimdall.zip
+      dest: ~/Heimdall-playbook
+      mode: 0700
+      owner: www-data
+    become: false
+
+  - name: Move Heimdall to webroot
+    command: mv -f ~/Heimdall-playbook/Heimdall-1.3.4 /var/www/html
+    become:
 
   - name: remove default index.html
     file:
@@ -38,7 +56,7 @@
   - name: 
     get_url:
       url: https://github.com/linuxserver/Heimdall/archive/v1.3.4.zip
-      dest: ~/Heimdall
+      dest: ./Heimdall.zip
 
   - name: 
       unarchive:
