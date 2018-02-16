@@ -2,7 +2,7 @@
 An ansible playbook that will deploy Heimdall and configure it as well as Nginx
 
 
-#Install Instructions
+# Install Instructions
 Update to the latest software avaliable
 sudo apt update -y && sudo apt upgrade -y
 
