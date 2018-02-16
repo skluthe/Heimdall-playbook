@@ -24,6 +24,10 @@
   - name: create /var/www/ directory
     file: dest=/var/www/ state=directory owner=www-data group=www-data mode=0777
 
+  - name: Fix log Permissions
+    file: dest=/var/www/ state=present owner=www-data group=www-data mode=0777
+
+
   - name: remove default index.html
     file:
       path: /var/www/html/index.nginx-debian.html
