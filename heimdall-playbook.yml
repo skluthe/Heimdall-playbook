@@ -10,7 +10,7 @@
     apt:
       update_cache: yes
       name: ansible
-      state: present
+      state: latest
 
   - name: Install Packages
     apt: name={{item}} update_cache=yes state=latest
@@ -30,7 +30,7 @@
       state: absent
 
   - name: Clone Heimdall Git Repo 
-    git: repo='https://github.com/skluthe/Heimdall-playbook' dest=/var/www/html clone=yes update=yes
+    git: repo='https://github.com/linuxserver/Heimdall' dest=/var/www/html clone=yes update=yes
 
 
 
@@ -65,6 +65,3 @@
       php_fpm_pool_conf_path: "/etc/php/7.0/fpm/pool.d/www.conf"  
   tasks: 
 
-
-    - name: Move Heimdall to /var/www/html
-      command: mv /var/www/html/Heimdall /var/www/html
