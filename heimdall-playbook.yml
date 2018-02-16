@@ -59,11 +59,11 @@
       dest: ./Heimdall.zip
 
   - name: 
-      unarchive:
-        src: ~/Heimdall
-        dest: /var/www/html
-        mode: 0700
-        owner: www-date
+    unarchive:
+      src: ~/Heimdall
+      dest: /var/www/html
+      mode: 0700
+      owner: www-date
 
   - name: Add Symfony config template to the Nginx available sites
     become: true
