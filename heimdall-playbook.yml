@@ -43,7 +43,7 @@
 
   - name: Move Heimdall to webroot
     command: mv -f ~/Heimdall-playbook/Heimdall-1.3.4 /var/www/html
-    become:
+    become: true
 
   - name: remove default index.html
     file:
@@ -52,18 +52,6 @@
 
 #  - name: Clone Heimdall Git Repo 
 #    git: repo='https://github.com/linuxserver/Heimdall' dest=/var/www/html clone=yes update=yes
-
-  - name: 
-    get_url:
-      url: https://github.com/linuxserver/Heimdall/archive/v1.3.4.zip
-      dest: ./Heimdall.zip
-
-  - name: 
-    unarchive:
-      src: ~/Heimdall
-      dest: /var/www/html
-      mode: 0700
-      owner: www-date
 
   - name: Add Symfony config template to the Nginx available sites
     become: true
