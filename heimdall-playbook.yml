@@ -20,6 +20,7 @@
       - php7.0-mbstring
       - php7.0-sqlite3
       - sqlite3
+      - nginx
   - name: create /var/www/ directory
     file: dest=/var/www/ state=directory owner=www-data group=www-data mode=0700
 
@@ -35,12 +36,12 @@
     become: true
     template:
       src: templates/nginx.conf
-      dest: "/etc/nginx/sites-avaliable/heimdall.conf"
+      dest: "/etc/nginx/sites-available/heimdall.conf"
 
   - name: Enable Symfony config template from Nginx available sites
     become: true
     file:
-      src: "/etc/nginx/sites-avaliable/heimdall.conf"
+      src: "/etc/nginx/sites-available/heimdall.conf"
       dest: "/etc/nginx/sites-enabled/heimdall.conf"
       state: link
 
