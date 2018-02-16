@@ -32,8 +32,20 @@
       path: /etc/nginx/sites-available/default
       state: absent
 
-  - name: Clone Heimdall Git Repo 
-    git: repo='https://github.com/linuxserver/Heimdall' dest=/var/www/html clone=yes update=yes
+#  - name: Clone Heimdall Git Repo 
+#    git: repo='https://github.com/linuxserver/Heimdall' dest=/var/www/html clone=yes update=yes
+
+  - name: 
+    get_url:
+      url: https://github.com/linuxserver/Heimdall/archive/v1.3.4.zip
+      dest: ~/Heimdall
+
+  - name: 
+      unarchive:
+        src: ~/Heimdall
+        dest: /var/www/html
+        mode: 0700
+        owner: www-date
 
   - name: Add Symfony config template to the Nginx available sites
     become: true
