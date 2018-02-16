@@ -32,6 +32,11 @@
   - name: Clone Heimdall Git Repo 
     git: repo='https://github.com/linuxserver/Heimdall' dest=/var/www/html clone=yes update=yes
 
+  - name: Create symlink to Heimdall
+    file: 
+      src: /var/www/html
+      dest: /etc/nginx/sites-available/html
+      state: link
 
 
   roles:
