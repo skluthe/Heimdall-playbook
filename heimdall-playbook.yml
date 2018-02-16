@@ -87,4 +87,4 @@
 
   post_tasks:
     - name: Change owner for html directory
-    file: dest=/var/www/html owner=www-data group=www-data mode=0700
+      file: dest=/var/www/html owner=www-data group=www-data mode=0700
